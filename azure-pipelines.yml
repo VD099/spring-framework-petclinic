@@ -1,4 +1,4 @@
-# Maven package Java project Web App to Linux on Azure
+
 # Build your Java project and deploy it to Azure as a Linux web app
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
@@ -62,7 +62,17 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: tstjava'
             inputs:
-              azureSubscription: $(azureSubscription)
+              azureSubscription: 'dip-java-tst'
               appType: webAppLinux
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+
+# appendCommitMessageToRunName:
+# # Maven package Java project Web App to Linux on Azure
+# - task: AzureWebApp@1
+#   inputs:
+#     azureSubscription: 'dip-java-tst'
+#     appType: 'webAppLinux'
+#     appName: 'tstjava'
+#     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#     runtimeStack: 'JAVA|8-jre8'
